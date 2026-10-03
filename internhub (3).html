@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternHub - Free Internships Across Tamil Nadu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e40af;
+            --accent: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== SEARCH & FILTER SECTION ===== */
+        .search-filters {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .search-container {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-self: flex-end;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* ===== METRICS STRIP ===== */
+        .metrics {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .metric-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .metric-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ===== DISTRICT HUBS GRID ===== */
+        .section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .districts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .district-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .district-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(37,99,235,0.12);
+            transform: translateY(-2px);
+        }
+
+        .district-card-header {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, var(--bg-light), var(--bg-white));
+        }
+
+        .district-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .district-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .district-card-body {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .district-description {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .district-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .stat-item {
+            padding: 0.75rem;
+            background: var(--bg-light);
+            border-radius: 6px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ===== INTERNSHIP CARDS ===== */
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .internship-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .internship-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .internship-header {
+            padding: 1.5rem;
+            background: var(--bg-light);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .company-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .company-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .company-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .internship-body {
+            padding: 1.5rem;
+        }
+
+        .position-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .position-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .internship-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .meta-item {
+            font-size: 0.85rem;
+        }
+
+        .meta-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .meta-value {
+            color: var(--primary);
+            font-weight: 700;
+            margin-top: 0.25rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
+            padding: 3rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover:not(:disabled) {
+            background: var(--primary-dark);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(16,185,129,0.1);
+            color: var(--success);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(239,68,68,0.1);
+            color: var(--error);
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .internship-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .districts-grid,
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-dark: #f3f4f6;
+                --text-light: #d1d5db;
+                --border: #374151;
+                --bg-light: #1f2937;
+                --bg-white: #111827;
+            }
+
+            body {
+                background: var(--bg-white);
+            }
+
+            header {
+                background: var(--bg-white);
+                border-bottom-color: var(--border);
+            }
+
+            .search-container {
+                background: var(--bg-white);
+                border-color: var(--border);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">InternHub</div>
+            <nav>
+                <a href="#districts">Districts</a>
+                <a href="#internships">Internships</a>
+                <a href="#form">Apply</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="breadcrumb">🎯 Tamil Nadu Opportunity Hub</span>
+            <h1>Free Internships Across All 38 Tamil Nadu Districts</h1>
+            <p>Discover paid internship opportunities aligned with India's semiconductor, automotive, and deep-tech ecosystem. Learn directly from industry leaders.</p>
+        </div>
+    </section>
+
+    <!-- SEARCH & FILTERS -->
+    <section class="search-filters">
+        <div class="search-container">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Search District or City</label>
+                    <input type="text" id="districtSearch" placeholder="e.g., Coimbatore, Hosur, Ambattur...">
+                </div>
+                <div class="filter-group">
+                    <label>Discipline Filter</label>
+                    <select id="disciplineFilter">
+                        <option value="">All Domains & Degrees</option>
+                        <option value="cs">Computer Science</option>
+                        <option value="mech">Mechanical Engineering</option>
+                        <option value="electrical">Electrical Engineering</option>
+                        <option value="civil">Civil Engineering</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Perks & Support</label>
+                    <select id="perksFilter">
+                        <option value="">All Perks</option>
+                        <option value="stipend">With Stipend</option>
+                        <option value="hostel">Hostel Provided</option>
+                        <option value="certificate">Certificate</option>
+                    </select>
+                </div>
+            </div>
+            <button class="search-btn" onclick="performSearch()">🔍 Search</button>
+        </div>
+
+        <!-- METRICS STRIP -->
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-icon">🏢</div>
+                <div class="metric-content">
+                    <h3>2,847+</h3>
+                    <p>Active Internships</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">🎓</div>
+                <div class="metric-content">
+                    <h3>15,230+</h3>
+                    <p>Students Placed</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">🏆</div>
+                <div class="metric-content">
+                    <h3>380+</h3>
+                    <p>Partner Companies</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon">💼</div>
+                <div class="metric-content">
+                    <h3>₹3.2L</h3>
+                    <p>Average Monthly Stipend</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DISTRICT HUBS -->
+    <section class="section" id="districts">
+        <div class="section-header">
+            <h2>Explore Regional Innovation Hubs</h2>
+            <p>Each district powers a unique industry ecosystem. Select your region to discover aligned opportunities.</p>
+        </div>
+        <div class="districts-grid">
+            <div class="district-card">
+                <div class="district-card-header">
+                    <div class="district-name">🏙️ Chennai & Environs</div>
+                    <div class="district-meta">North Tamil Nadu</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">State flagship corridors powering global fintech, automotive lines, and deep-tech SaaS product headquarters.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">347</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹3.5L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Excellent</div></div>
+                        <div class="stat-item"><div class="stat-label">Hostel</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="district-card" style="border-color: var(--primary); box-shadow: 0 4px 12px rgba(37,99,235,0.15);">
+                <div class="district-card-header" style="background: linear-gradient(to bottom, rgba(37,99,235,0.1), var(--bg-white));">
+                    <div class="district-name">⚙️ Coimbatore (West)</div>
+                    <div class="district-meta">Active Focus Region</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">Rapidly expanding Tier-2 engineering capital balancing global software delivery with world-class foundry automation.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">521</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹2.8L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Very Good</div></div>
+                        <div class="stat-item"><div class="stat-label">Canteen</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="district-card">
+                <div class="district-card-header">
+                    <div class="district-name">🏭 Hosur & Krishnagiri</div>
+                    <div class="district-meta">West / Border Region</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">India's highest density electric two-wheeler and precision mechatronics manufacturing ecosystem.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">298</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹2.2L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Good</div></div>
+                        <div class="stat-item"><div class="stat-label">Hostel</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="district-card">
+                <div class="district-card-header">
+                    <div class="district-name">🎭 Madurai (South)</div>
+                    <div class="district-meta">Southern Hub</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">Southern nerve center combining Tier-1 enterprise IT campuses with pioneering clinical healthcare devices.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">216</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹2.9L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Good</div></div>
+                        <div class="stat-item"><div class="stat-label">Hostel</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="district-card">
+                <div class="district-card-header">
+                    <div class="district-name">⚒️ Trichy (Central)</div>
+                    <div class="district-meta">Central Tamil Nadu</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">World benchmark for heavy engineering, boiler manufacturing, combined with premier academic incubators.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">189</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹2.1L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Moderate</div></div>
+                        <div class="stat-item"><div class="stat-label">Certificate</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="district-card">
+                <div class="district-card-header">
+                    <div class="district-name">🏗️ Salem & Erode</div>
+                    <div class="district-meta">Western Region</div>
+                </div>
+                <div class="district-card-body">
+                    <p class="district-description">Steel processing, magnesite mining, automated powerloom plants, and cold-chain agritech supply networks.</p>
+                    <div class="district-stats">
+                        <div class="stat-item"><div class="stat-label">Open Roles</div><div class="stat-value">267</div></div>
+                        <div class="stat-item"><div class="stat-label">Avg Stipend</div><div class="stat-value">₹2.3L</div></div>
+                        <div class="stat-item"><div class="stat-label">Transit</div><div class="stat-value">Good</div></div>
+                        <div class="stat-item"><div class="stat-label">Certificate</div><div class="stat-value">Available</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED INTERNSHIPS -->
+    <section class="section" id="internships">
+        <div class="section-header">
+            <h2>Featured Opportunities in Coimbatore</h2>
+            <p>Handpicked roles from industry leaders. Matching your skills to real market demand.</p>
+        </div>
+
+        <div class="internship-grid">
+            <div class="internship-card">
+                <div class="internship-header">
+                    <div class="company-icon">TI</div>
+                    <div class="company-info">
+                        <h3>TIDEL Park</h3>
+                        <p>Chennai, Technology Campus</p>
+                    </div>
+                </div>
+                <div class="internship-body">
+                    <h3 class="position-title">Full Stack Python & React Intern</h3>
+                    <p class="position-desc">Assist in developing enterprise inventory microservices. Work directly under senior architects on PostgreSQL optimization.</p>
+                    <div class="internship-meta">
+                        <div class="meta-item"><div class="meta-label">Stipend</div><div class="meta-value">₹3.2L/mo</div></div>
+                        <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">6 months</div></div>
+                        <div class="meta-item"><div class="meta-label">Transit</div><div class="meta-value">Bus @ 6am</div></div>
+                        <div class="meta-item"><div class="meta-label">Hostel</div><div class="meta-value">Provided</div></div>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="internship-card">
+                <div class="internship-header">
+                    <div class="company-icon">PM</div>
+                    <div class="company-info">
+                        <h3>Peelamedu Auto</h3>
+                        <p>Coimbatore, Manufacturing</p>
+                    </div>
+                </div>
+                <div class="internship-body">
+                    <h3 class="position-title">CNC Tooling & CMM Quality Intern</h3>
+                    <p class="position-desc">Hands-on coordinate measuring machine (CMM) inspection, CAD/CAM drawing verification, and surface quality assessment.</p>
+                    <div class="internship-meta">
+                        <div class="meta-item"><div class="meta-label">Stipend</div><div class="meta-value">₹2.1L/mo</div></div>
+                        <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">4 months</div></div>
+                        <div class="meta-item"><div class="meta-label">Transit</div><div class="meta-value">Auto Rikshaw Available</div></div>
+                        <div class="meta-item"><div class="meta-label">Canteen</div><div class="meta-value">Available</div></div>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">CNC Machines</span>
+                        <span class="skill-tag">CAD/CAM</span>
+                        <span class="skill-tag">Metrology</span>
+                        <span class="skill-tag">Quality Control</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="internship-card">
+                <div class="internship-header">
+                    <div class="company-icon">SA</div>
+                    <div class="company-info">
+                        <h3>Saravanampatti Tech</h3>
+                        <p>Coimbatore, IoT Hardware</p>
+                    </div>
+                </div>
+                <div class="internship-body">
+                    <h3 class="position-title">IoT Sensor Firmware & Telemetry Intern</h3>
+                    <p class="position-desc">Build ESP32 and STM32 firmware for agricultural drip irrigation pumps and energy monitoring meters.</p>
+                    <div class="internship-meta">
+                        <div class="meta-item"><div class="meta-label">Stipend</div><div class="meta-value">₹2.5L/mo</div></div>
+                        <div class="meta-item"><div class="meta-label">Duration</div><div class="meta-value">6 months</div></div>
+                        <div class="meta-item"><div class="meta-label">Transit</div><div class="meta-value">Bike Commute OK</div></div>
+                        <div class="meta-item"><div class="meta-label">Hostel</div><div class="meta-value">Nearby Rooms</div></div>
+                    </div>
+                    <div class="skills">
+                        <span class="skill-tag">Embedded C</span>
+                        <span class="skill-tag">ESP32/STM32</span>
+                        <span class="skill-tag">MQTT</span>
+                        <span class="skill-tag">IoT Protocols</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="form-section" id="form">
+        <div class="form-container">
+            <div class="form-header">
+                <h2>Express Your Interest</h2>
+                <p>Join thousands of interns shaping Tamil Nadu's tech future</p>
+            </div>
+            <form id="interestForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
+                </div>
+                <button type="submit" class="form-submit" id="submitBtn">Register Your Interest</button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 InternHub - Powering Tamil Nadu's Next Generation of Innovators</p>
+    </footer>
+
+    <script>
+        // AppScript deployment URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEqSpzvKRsSeixoSg5mf5NvT4_sZ6_e1slHDGTjY-tFKMWJFCWNSRczR-SwRM-9SRh/exec';
+
+        // Form submission handler
+        document.getElementById('interestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitForm();
+        });
+
+        function submitForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+
+            // Validate
+            if (!name || !email || !phone) {
+                showMessage('Please fill in all fields', 'error');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            // Build URL with query parameters
+            const params = new URLSearchParams({
+                name: name,
+                email: email,
+                phone: phone
+            });
+
+            const url = SCRIPT_URL + '?' + params.toString();
+
+            // CRITICAL: Use fetch with GET and no-cors mode
+            // NO .then(res => res.json()) - this causes 404/security error
+            // Response is opaque - don't check response.ok or response.status
+            fetch(url, {
+                method: 'get',
+                mode: 'no-cors'
+            })
+            .then(() => {
+                // Success - response is opaque so we just proceed
+                showMessage('✓ Your interest has been registered! We\'ll be in touch soon.', 'success');
+                document.getElementById('interestForm').reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Your Interest';
+            })
+            .catch(() => {
+                // Error
+                showMessage('⚠ There was an issue submitting your information. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Register Your Interest';
+            });
+        }
+
+        function showMessage(text, type) {
+            const formMessage = document.getElementById('formMessage');
+            formMessage.textContent = text;
+            formMessage.className = 'form-message ' + type;
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    formMessage.className = 'form-message';
+                }, 5000);
+            }
+        }
+
+        function performSearch() {
+            const district = document.getElementById('districtSearch').value;
+            const discipline = document.getElementById('disciplineFilter').value;
+            const perks = document.getElementById('perksFilter').value;
+
+            // Scroll to internships section
+            document.getElementById('internships').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
